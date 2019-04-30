@@ -1,0 +1,44 @@
+* Jaas
+
+#+BEGIN_SRC plantuml :file uml/login.jpg
+hide footbox
+Client -> LoginContext : login
+create SampleLoginModule
+LoginContext -> SampleLoginModule :  <<create>>
+SampleLoginModule -> SampleLoginModule : initialize(...)
+LoginContext -> SampleLoginModule : login()
+create Callback
+SampleLoginModule -> Callback : <<create>> 
+SampleLoginModule -> MyCallbackHandler : handle(Callback[] callbacks)
+note over MyCallbackHandler: prompt user for\nname and password
+SampleLoginModule <- MyCallbackHandler
+note over SampleLoginModule: check name and password
+LoginContext <- SampleLoginModule : login()
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/login.jpg]]
+
+
+#+BEGIN_SRC plantuml :file uml/callback.jpg 
+LoginContext - CallbackHandler
+LoginContext --- LoginModule
+interface CallbackHandler  {
+     void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException;
+}
+CallbackHandler <|.. MyCallbackHandler
+interface Callback {
+}
+Callback <|.. PasswordCallback
+interface LoginModule {
+void initialize(Subject subject, CallbackHandler callbackHandler, Map<String,?> sharedState, Map<String,?> options)
+boolean login()
+}
+LoginModule - Callback
+LoginModule <|.. SampleLoginModule
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/callback.jpg]]
+ 
+

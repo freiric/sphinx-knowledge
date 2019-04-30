@@ -1,0 +1,36 @@
+#+BEGIN_SRC plantuml :file uml/postprocessor.jpg
+interface ObjectPostProcessor{
+T postProcess(T object)
+}
+SecurityConfigurerAdapter -- CompositeObjectPostProcessor
+ObjectPostProcessor <.. CompositeObjectPostProcessor
+ObjectPostProcessor <.. AutowireBeanFactoryObjectPostProcessor
+AutowireBeanFactoryObjectPostProcessor -- AutowireCapableBeanFactory
+interface AutowireCapableBeanFactory{
+Object initializeBean(Object existingBean, String beanName)
+}
+
+interface InitializingBean {
+void afterPropertiesSet() 
+}
+
+interface BeanFactory{
+}
+BeanFactory <-- AutowireCapableBeanFactory
+interface BeanFactory{
+Object getBean(String name) 
+}
+AbstractBeanFactory <-- AbstractAutowireCapableBeanFactory
+class AbstractBeanFactory{
+<T> T doGetBean(String name , Class<T> requiredType, Object[] args, boolean typeCheckOnly)
+}
+AutowireCapableBeanFactory <.. AbstractAutowireCapableBeanFactory
+class AbstractAutowireCapableBeanFactory{
+invokeInitMethods(String beanName, final Object bean, RootBeanDefinition mbd)
+Object initializeBean(final String beanName, final Object bean, RootBeanDefinition mbd)
+}
+AbstractAutowireCapableBeanFactory <-- DefaultListableBeanFactory
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/postprocessor.jpg]]

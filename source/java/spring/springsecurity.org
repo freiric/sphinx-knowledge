@@ -1,0 +1,126 @@
+
+#+BEGIN_SRC plantuml :file uml/UserDetails.jpg
+SecurityContextHolder - SecurityContext
+SecurityContext - Authentication
+Authentication -- "*" GrantedAuthority
+Object <|-- UserDetails 
+Authentication -- Object : getPrincipal()
+interface UserDetails {
+}
+UserDetails <|-- LdapUserDetails
+interface LdapUserDetails {
+}
+UserDetails <|.. User
+LdapUserDetails <|.. LdapUserDetailsImpl
+interface UserDetailsService {
+   UserDetails loadUserByUsername(String username)
+}
+interface UserDetailsContextMapper {
+   UserDetails mapUserFromContext(DirContextOperations ctx, String username, Collection<? extends GrantedAuthority> authorities);
+}
+UserDetailsContextMapper <|.. LdapUserDetailsMapper
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/UserDetails.jpg]]
+
+#+BEGIN_SRC plantuml :file uml/architecture.jpg
+interface AuthenticationManager {
+Authentication authenticate(Authentication)
+}
+AuthenticationManager <|.. ProviderManager
+ProviderManager -- "*" AuthenticationProvider
+interface AuthenticationProvider {
+}
+AuthenticationProvider <|.. AbstractLdapAuthenticationProvider
+class AbstractLdapAuthenticationProvider {
+Authentication authenticate(Authentication authentication)
+}
+AbstractLdapAuthenticationProvider -- LdapUserSearch
+interface LdapUserSearch {
+}
+AbstractLdapAuthenticationProvider -- UserDetailsContextMapper
+interface UserDetailsContextMapper{
+}
+UserDetailsContextMapper <|.. LdapUserDetailsMapper
+AbstractLdapAuthenticationProvider <|-- LdapAuthenticationProvider
+AbstractLdapAuthenticationProvider <|-- ActiveDirectoryLdapAuthenticationProvider
+class LdapAuthenticationProvider{
+DirContextOperations doAuthentication(UsernamePasswordAuthenticationToken authentication)
+}
+LdapUserSearch <|.. FilterBasedLdapUserSearch
+LdapAuthenticationProvider -- LdapAuthenticator
+LdapAuthenticator <|-- BindAuthenticator
+LdapAuthenticationProvider -- LdapAuthoritiesPopulator
+AuthenticationProvider <|.. AbstractUserDetailsAuthenticationProvider
+AbstractUserDetailsAuthenticationProvider <|-- DaoAuthenticationProvider
+class AbstractUserDetailsAuthenticationProvider {
+Authentication authenticate(Authentication authentication)
+}
+DaoAuthenticationProvider -- UserDetailsService
+interface UserDetailsService {
+}
+class DaoAuthenticationProvider {
+UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/architecture.jpg]]
+
+
+#+BEGIN_SRC plantuml :file uml/authenticationManagerBuilder.jpg
+AbstractSecurityBuilder <|-- AbstractConfiguredSecurityBuilder
+class AbstractSecurityBuilder {
+build()
+}
+AbstractConfiguredSecurityBuilder <|-- AuthenticationManagerBuilder
+class AbstractConfiguredSecurityBuilder {
+ # doBuild()
+- configure()
+}
+AbstractConfiguredSecurityBuilder - "*" SecurityConfigurer
+SecurityConfigurer <|-- SecurityConfigurerAdapter
+SecurityConfigurerAdapter <|-- UserDetailsAwareConfigurer
+UserDetailsAwareConfigurer <|-- AbstractDaoAuthenticationConfigurer
+class AbstractDaoAuthenticationConfigurer{
+configure()
+}
+AbstractDaoAuthenticationConfigurer <|-- UserDetailsServiceConfigurer
+AbstractDaoAuthenticationConfigurer o-- DaoAuthenticationProvider
+AbstractUserDetailsAuthenticationProvider <|-- DaoAuthenticationProvider
+AuthenticationProvider <|.. AbstractUserDetailsAuthenticationProvider
+class UserDetailsServiceConfigurer {
+configure(B builder)
+}
+UserDetailsServiceConfigurer <|-- UserDetailsManagerConfigurer
+class UserDetailsManagerConfigurer {
+initUserDetailsService()
+}
+UserDetailsManagerConfigurer <|-- JdbcUserDetailsManagerConfigurer
+class JdbcUserDetailsManagerConfigurer{
+initUserDetailsService()
+}
+AuthenticationConfiguration -- AuthenticationManagerBuilder
+class AuthenticationConfiguration{
+   getAuthenticationManager()
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/authenticationManagerBuilder.jpg]]
+[[file:uml/authenticationManagerBuilder.jpg]]
+
+
+#+BEGIN_SRC plantuml :file uml/exceptions.jpg
+AuthenticationException <|-- BadCredentialsException
+AuthenticationException <|-- AccountStatusException
+AccountStatusException <|-- CredentialsExpiredException
+AccountStatusException <|--  DisabledException
+AccountStatusException <|-- AccountExpiredException
+AccountStatusException <|-- LockedException
+
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/exceptions.jpg]]

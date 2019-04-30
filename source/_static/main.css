@@ -1,0 +1,4 @@
+@import url("default.css");
+div.body {
+    max-width: none;
+}

@@ -1,0 +1,9 @@
+digraph G { 
+	forcelabels=true
+	node [shape=box]
+        a; 
+        b; 
+        c [label="",shape=triangle, orientation=-90,labeldistance=2.5,xlabel="longlabel"]; 
+	c -> d;
+        a -> c; 
+} 

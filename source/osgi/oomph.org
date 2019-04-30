@@ -1,0 +1,69 @@
+#+BEGIN_SRC plantuml :file uml/oomph.jpg
+Wizard <-- SetupWizard
+SetupWizard - WizardFinisher
+SetupWizard <-- Installer
+class SetupWizard{
+SetupTaskPerformer getPerformer()
+}
+Installer -- ProductPage
+Installer -- ProjectPage
+Installer -- ExtensionPage
+SetupWizard -- VariablePage
+SetupWizard -- ConfirmationPage
+SetupWizard -- ProgressPage
+WizardPage <-- SetupWizardPage
+SetupWizardPage <-- ExtensionPage
+class SetupWizardPage {
+SetupTaskPerformer getPerformer()
+void enterPage(boolean)
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/oomph.jpg]]
+
+#+BEGIN_SRC plantuml :file uml/ProgressPage.jpg
+hide footbox
+ -> ProgressPage : enterPage(boolean)
+ProgressPage -> SetupTaskPerformer : perform(progressPageLog);
+#+END_SRC
+
+#+RESULTS:
+[[file:ProgressPage.jpg]]
+
+#+BEGIN_SRC plantuml :file extensionPage.jpg
+hide footbox
+-> ExtensionPage : enterPage()
+create PerformerCreationJob
+ExtensionPage -> PerformerCreationJob
+ExtensionPage -> PerformerCreationJob : create()
+PerformerCreationJob -> PerformerCreationJob : run()
+create Performer
+PerformerCreationJob -> Performer : createPerformer()
+ExtensionPage -> Performer : getTriggeredSetupTasks()
+ExtensionPage -> EnablementComposite : setInput(triggeredSetupTasks) 
+
+#+END_SRC
+
+#+RESULTS:
+[[file:extensionPage.jpg]]
+
+#+BEGIN_SRC plantuml :file uml/setPerformer.jpg
+hide footbox
+ -> VariablePage : enterPage( boolean)
+VariablePage  -> VariablePage: validate()
+create PerformerCreationJob
+VariablePage  -> PerformerCreationJob
+VariablePage  -> PerformerCreationJob : create()
+VariablePage -> PerformerCreationJob : create()
+PerformerCreationJob -> PerformerCreationJob : run()
+create Performer
+PerformerCreationJob -> Performer : createPerformer()
+ -> VariablePage : leavePage(boolean)
+VariablePage -> SetupWizard : setPerformer(performer);
+-> ProgressPage : enterPage()
+ProgressPage ->  Performer : perform()
+#+END_SRC
+
+#+RESULTS:
+[[file:uml/setPerformer.jpg]]

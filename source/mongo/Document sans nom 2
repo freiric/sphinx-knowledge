@@ -1,0 +1,40 @@
+db.twevents.aggregate({ $project: { tags: 1 }}, { $unwind: '$tags' }, {$match: {tags: {$regex: 'mathe'}}}, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$sort: {tagcount: -1}} )
+
+
+db.twevents.aggregate({$match: {tags: {$regex: /^mathe/}}}, {$project: { tags: 1 }}, { $unwind: '$tags' }, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$sort: {tagcount: -1}} )
+
+db.twevents.find({tags: {$regex: 'sport'}}).count()
+
+db.twevents.ensureIndex( { tags: "text" } )
+
+db.twevents.find( { $text: { $search: "sport" } } )
+
+db.twevents.aggregate({$match: {$text: {$search: 'mathe'}}}, { $project: { tags: 1 }}, { $unwind: '$tags' }, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$sort: {tagcount: -1}} )
+
+
+db.twevents.aggregate({$match: {$text: {$search: 'mathe'}}}, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$sort: {tagcount: -1}} )
+
+db.twevents.aggregate({$match: {$text: {$search: 'mathe'}}}, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$sort: {tagcount: -1}} )
+
+
+db.twevents.aggregate([
+	{$match: {$text: {$search: 'mathe'}}},  
+	{ $unwind: '$tags' }, 
+	{ $group: { _id: '$tags', tagcount: {$sum: 1}}},
+	{ $sort: { score: { $meta: "textScore" }}}
+])
+
+db.twevents.ensureIndex({tags:1})
+db.twevents.getIndexes()
+
+db.twevents.aggregate({$match: {tags: {$elemMatch : {$gte: "mathe", $lt:'mathez'}}}}, {$project: { tags: 1 }}, { $unwind: '$tags' }, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$sort: {tagcount: -1}} )
+
+db.twevents.aggregate({$match: {tags: {$elemMatch : {$gte: "mathe", $lt:'mathez'}}}}, { $unwind: '$tags' }, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$match: {_id: {$gte: "mathe", $lt:'mathez'}}},{$sort: {tagcount: -1}} )
+			       
+db.twevents.aggregate({$match: {tags: {$elemMatch : {$gte: 'mathe', $lt:'mathez'}}}}, { $group: { _id: '$tags', tagcount: {$sum: 1}}}, {$match: {tags: {$gte: "mathe", $lt:'mathez'}}}, {$sort: {tagcount: -1}} )
+
+db.twevents.aggregate({$match: {tags: {'$gt': "mathe"}}}, { $group: { _id: '$tags', tagcount: {$sum: 1}}})
+
+db.twevents.find({tags: {$elemMatch : {$gte: 'm', $lt:'m'}}}, {'tags.$':1})
+
+db.twevents.find({tags: {$elemMatch : {$gte: 'm', $lt:'m'}}}, {'tags.$':1})

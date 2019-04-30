@@ -1,0 +1,9 @@
+org.eclipse.equinox.common
+org.eclipse.equinox.app
+org.eclipse.core.jobs
+org.eclipse.core.runtime
+org.eclipse.osgi
+org.eclipse.equinox.preferences
+org.eclipse.osgi.services
+org.eclipse.equinox.registry
+org.eclipse.core.contenttype

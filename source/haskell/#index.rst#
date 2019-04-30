@@ -1,0 +1,8 @@
+Haskell
+=======
+
+.. toctree::
+ 
+   tooling
+   template-haskell
+   generic
