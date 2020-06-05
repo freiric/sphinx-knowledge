@@ -1,26 +1,5 @@
-Spring
-======
-
-Boot
-+++++++++
-Actuator
-*********
-Add access point on web service to check met property as health
-
-Spring cloud
-++++++++++++++++++++
-
-Spring coud config
-*******************
-
-Spring cloud tasks
-*******************
-
-Web
-+++++
-
 Security
-++++++++
+===========
 
 .. code-block:: java
    :caption: authenticate()
@@ -29,16 +8,16 @@ Security
    Authentication authentication = new UsernamePasswordAuthenticationToken("bob", "bobspassword");		
    am.authenticate(authentication);
 
-.. figure:: uml/UserDetails.jpg
+.. figure:: uml/UserDetails.png
 
    Accessing UserDetails
    
-.. figure:: uml/architecture.jpg
+.. figure:: uml/architecture.png
 
    AuthenticationManager
 
 	    
-.. figure:: uml/authenticationManagerBuilder.jpg
+.. figure:: uml/authenticationManagerBuilder.png
 
    authenticationManagerBuilder
 

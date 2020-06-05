@@ -84,15 +84,18 @@ Search for installed package information
 Emacs
 *****
 
-Haskell-mode
-++++++++++++
+`Haskell-mode <http://haskell.github.io/haskell-mode/manual/latest/>`_
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. code-block:: bash
 
+   cabal install hasktags
    M-x haskell-process-generate-tags
 
+
+   
 `Flycheck <https://www.flycheck.org/en/latest/languages.html>`_
-****************************************************************
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 `flycheck-haskell <https://github.com/flycheck/flycheck-haskell>`_
 
@@ -101,6 +104,10 @@ Have a stack in your path if you want to use stack...
 .. code-block:: shell
 
    export PATH="~/.cabal/bin:$PATH"
+
+`haskell-ide-engine <https://github.com/haskell/haskell-ide-engine>`_
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 
 Cask

@@ -3,8 +3,18 @@ Jameica
 
 OSGi like
 
-de.willuhn.jameica.Main
+- `Jameica <https://www.willuhn.de/products/jameica/>`_
+- `Willuhn repo <https://github.com/willuhn/repositories>`_
+  
 
+.. figure:: uml/Main.png
+
+.. figure:: uml/ApplicationController.png
+
+
+	    
+Entry point  
+``de.willuhn.jameica.Main``
 Services in Init5
 
 	- SecurityManagerService

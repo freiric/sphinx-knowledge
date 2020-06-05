@@ -1,6 +1,13 @@
 Container
 ============
 
+.. toctree::
+
+   docker/index
+   kubernetes/index
+   other/index
+
+
 Vagrant
 **********
 
@@ -16,8 +23,3 @@ install from download page.
    vagrant add boxname
    
 
-.. toctree::
-
-   docker/index
-   kubernetes/index
-   other/index

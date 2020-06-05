@@ -1,0 +1,25 @@
+#+begin_src plantuml :file uml/SpringApplication.run.png
+hide footbox
+create SpringApplication
+-> SpringApplication : new SpringApplication(Class<?>...)
+-> SpringApplication : run(args)
+create ConfigurableApplicationContext
+SpringApplication -> ConfigurableApplicationContext: createApplicationContext()
+#+end_src
+
+#+RESULTS:
+[[file:uml/SpringApplication.run.png]]
+
+#+begin_src plantuml :file uml/InitializersAndListener.png
+interface ApplicationContextInitializer<C extends ConfigurableApplicationContext>{
+void initialize(C applicationContext)
+}
+interface  EventListener
+interface ApplicationListener<E extends ApplicationEvent>{
+void onApplicationEvent(E event)
+}
+EventListener <|-- ApplicationListener
+#+end_src
+
+#+RESULTS:
+[[file:uml/InitializersAndListener.png]]

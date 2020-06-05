@@ -4,19 +4,22 @@ Tooling
 Npm
 ++++++
 
-`Nvm - Node Version Manager - Simple bash script to manage multiple active node.js versions  <https://github.com/creationix/nvm>`_
+One can use `Nvm - Node Version Manager - Simple bash script to manage multiple active node.js versions  <https://github.com/creationix/nvm>`_
+configured with ``package.json``
+
 
 `Webpack <https://webpack.github.io/docs/>`_  vs `Grunt <https://gruntjs.com/>`_
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Starters
 *********
-https://github.com/wbkd/webpack-starter
 
+- https://github.com/wbkd/webpack-starter
+-  `JHIPSTER <https://www.jhipster.tech/>`_
+- https://ngx-rocket.com/home
 
 Yarn vs npm
 **************
-
 
 Stand 2018, Yarn et Npm se reattrapent l'un l'autre -> a priori on a plus besoin de yarn...
 

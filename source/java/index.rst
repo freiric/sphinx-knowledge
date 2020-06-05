@@ -2,7 +2,7 @@ JAVA
 =========
 
 .. toctree:: 
-   spring/security.rst
+   spring/index.rst
    jaas.rst
    test/index.rst
    drools/inde.rst

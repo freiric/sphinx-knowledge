@@ -1,3 +1,42 @@
+#+begin_src plantuml :file uml/PropertyResolver.png
+package org.springframework.core.env {
+interface PropertyResolver{
+String resolvePlaceholders(String)
+}
+class MutablePropertySources
+PropertyResolver <|-- Environment
+interface ConfigurablePropertyResolver
+PropertyResolver <|-- ConfigurablePropertyResolver
+ConfigurablePropertyResolver <|.. AbstractPropertyResolver
+AbstractPropertyResolver  <|-- PropertySourcesPropertyResolver
+PropertySourcesPropertyResolver - PropertySources
+PropertySources -"*" PropertySource
+interface PropertySource
+PropertySources <|--  MutablePropertySources
+PropertySource <|-- MapPropertySource
+}
+PropertySource <|--  org.springframework.boot.ansi.AnsiPropertySource
+#+end_src
+
+#+RESULTS:
+[[file:uml/PropertyResolver.png]]
+
+
+#+begin_src plantuml :file uml/ConfigurableApplicationContext.png
+interface BeanFactory
+BeanFactory <|-- ApplicationContext
+interface ApplicationContext
+ApplicationContext <|-- ConfigurableApplicationContext
+interface ConfigurableApplicationContext {
++void refresh()
+}
+ConfigurableApplicationContext <|.. AbstractApplicationContext
+
+#+end_src
+
+#+RESULTS:
+[[file:uml/ConfigurableApplicationContext.png]]
+
 #+BEGIN_SRC plantuml :file uml/postprocessor.jpg
 interface ObjectPostProcessor{
 T postProcess(T object)

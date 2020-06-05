@@ -5,7 +5,7 @@ Based on cgroups and namespaces...
 
 .. code-block:: shell
 
-   docker containter ls # list of running containter
+   docker container ls # list of running containter
    docker start -it run sh #  start a conatiner and run a termina while attaching standard input/output
    docker exec -it containerid sh # execute a command (here a terminal) in a running container 
    docker inspect ...
@@ -27,7 +27,7 @@ Layer 7 load-balancing
 ipvmac requires promiscuous mode  on guest nic @network
 
 
-docker stack (prev dopcker compose)
+docker stack (prev docker compose)
 ++++++++++++++++++++++++++++++++++++
 
 The ``docker stack`` is integrated ion docker since vers. 1.12 and replace ``docker-compose`` except it does not build images.
@@ -40,7 +40,7 @@ The ``docker stack`` is integrated ion docker since vers. 1.12 and replace ``doc
    docker stack deploy -c docker-compose.yml somestackname
 
 
-docker networkin
+docker networking
 +++++++++++++++++
 
 
@@ -63,6 +63,6 @@ docker networkin
 
 .. code-block:: sh
 
-   docker networ ls
+   docker network ls
 
 Scope is either local (single-host) or swarm (multi-host)   

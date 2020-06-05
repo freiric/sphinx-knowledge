@@ -1,5 +1,5 @@
 
-#+BEGIN_SRC plantuml :file uml/UserDetails.jpg
+#+BEGIN_SRC plantuml :file uml/UserDetails.png
 SecurityContextHolder - SecurityContext
 SecurityContext - Authentication
 Authentication -- "*" GrantedAuthority
@@ -22,9 +22,9 @@ UserDetailsContextMapper <|.. LdapUserDetailsMapper
 #+END_SRC
 
 #+RESULTS:
-[[file:uml/UserDetails.jpg]]
+[[file:uml/UserDetails.png]]
 
-#+BEGIN_SRC plantuml :file uml/architecture.jpg
+#+BEGIN_SRC plantuml :file uml/architecture.png
 interface AuthenticationManager {
 Authentication authenticate(Authentication)
 }
@@ -66,10 +66,10 @@ UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken au
 #+END_SRC
 
 #+RESULTS:
-[[file:uml/architecture.jpg]]
+[[file:uml/architecture.png]]
 
 
-#+BEGIN_SRC plantuml :file uml/authenticationManagerBuilder.jpg
+#+BEGIN_SRC plantuml :file uml/authenticationManagerBuilder.png
 AbstractSecurityBuilder <|-- AbstractConfiguredSecurityBuilder
 class AbstractSecurityBuilder {
 build()
@@ -108,11 +108,11 @@ class AuthenticationConfiguration{
 #+END_SRC
 
 #+RESULTS:
-[[file:uml/authenticationManagerBuilder.jpg]]
+[[file:uml/authenticationManagerBuilder.png]]
 [[file:uml/authenticationManagerBuilder.jpg]]
 
 
-#+BEGIN_SRC plantuml :file uml/exceptions.jpg
+#+BEGIN_SRC plantuml :file uml/exceptions.png
 AuthenticationException <|-- BadCredentialsException
 AuthenticationException <|-- AccountStatusException
 AccountStatusException <|-- CredentialsExpiredException
@@ -123,4 +123,4 @@ AccountStatusException <|-- LockedException
 #+END_SRC
 
 #+RESULTS:
-[[file:uml/exceptions.jpg]]
+[[file:uml/exceptions.png]]

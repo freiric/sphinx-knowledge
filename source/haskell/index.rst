@@ -8,7 +8,8 @@ Haskell
    genericProgramming
    lens
    hakyll
-
+   Web/index
+   
 references:
 
    `wikibook <http://en.wikibooks.org/wiki/Haskell>`_

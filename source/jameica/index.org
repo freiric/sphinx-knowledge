@@ -1,0 +1,60 @@
+#+begin_src plantuml :file uml/Main.png
+hide footbox
+participant Main
+create Application
+Main -> Application : newInstance(StartupParams)
+activate Application
+Application -> Application  : getCallback()
+Application -> Application : getController()
+create GUI
+Application -> GUI
+GUI -> GUI : getStartupMonitor()
+create ApplicationCallbackSWT
+GUI -> ApplicationCallbackSWT
+GUI -> ApplicationCallbackSWT : getStartupMonitor()
+ApplicationCallbackSWT -> ApplicationCallbackSWT : setStatusText("starting jameica")
+deactivate Application
+create BootLoader
+Application -> BootLoader
+Application -> BootLoader : getBootable(Init5.class)
+create Init5
+BootLoader -> Init5
+BootLoader -> Init5 : init()
+#+end_src
+
+#+RESULTS:
+[[file:uml/Main.png]]
+
+
+#+begin_src plantuml :file uml/ApplicationController.png
+Application -- ApplicationController
+Application --- Bootloader
+class Bootloader {
+getBootable(Class<? extends Bootable> target)
+}
+interface ApplicationController {
+ApplicationCallback getApplicationCallback()
+}
+interface ApplicationCallback
+ApplicationController o- ApplicationCallback
+interface ProgressMonitor
+ApplicationCallback o- ProgressMonitor
+ApplicationController <|-- GUI
+ApplicationController <|-- Server
+
+class Bootable {
+init(BootLoader loader, Bootable caller)
+}
+Bootable -"*" Bootable : depends
+#+end_src
+
+#+RESULTS:
+[[file:uml/ApplicationController.png]]
+
+
+#+begin_src plantuml :file uml/PluginService.png
+PluginService -- PluginLoader
+#+end_src
+
+#+RESULTS:
+[[file:uml/PluginService.png]]
