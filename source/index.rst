@@ -20,6 +20,7 @@ Welcome to Personal Knowledge's documentation!
   web/index
   encryption/index
   jameica/index
+  izpack/index
   python/index
   cplusplus/index
   java/index

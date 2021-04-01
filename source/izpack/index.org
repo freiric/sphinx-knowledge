@@ -1,0 +1,148 @@
+ * wiki
+
+https://izpack.atlassian.net/wiki/
+
+* compile phase
+#+begin_src plantuml :file uml/IzPackNewMojo.png
+hide footbox
+-> IzPackNewMojo : execute()
+IzPackNewMojo-> CompilerConfig : executeCompiler()
+CompilerConfig -> ResourceFinder : getXMLTree(IXMLParser)
+ResourceFinder -> IXMLParser : parse(InputStream, String)
+IXMLParser -> XMLParser : parseLineNrFromInputSource(InputSource)
+XMLParser -> Transformer : transform(Source, Result)
+CompilerConfig -> CompilerConfig : loadPackagingInformation(IXMLElement)
+CompilerConfig -> ObjectFactory : create(String, Class<IPackager>, Object...)
+CompilerConfig -> CompilerConfig : addResources(IXMLElement)
+CompilerConfig -> CompilerConfig : addResources(IXMLElement, File)
+activate CompilerConfig #LightSalmon
+create UserInputSpecXmlParser
+CompilerConfig -> UserInputSpecXmlParser : new
+CompilerConfig -> UserInputSpecXmlParser : parse(URL)
+deactivate CompilerConfig
+#+end_src
+
+#+RESULTS:
+[[file:uml/IzPackNewMojo.png]]
+
+* instal phase
+com.izforge.izpack.installer.bootstrap.Installer
+
+#+begin_src plantuml :file uml/installer.png
+  hide footbox 
+  -> Installer : start(String[]) 
+  Installer -> Installer : launchInstall(type, consoleAction, path, langcode, media, defaults, args); 
+  Installer -> InstallerGui : run(String, String, Overrides)
+  create GUIInstallerContainer 
+  InstallerGui ->  GUIInstallerContainer : GUIInstallerContainer()
+  create MutablePicoContainer
+  GUIInstallerContainer ->  MutablePicoContainer :   createContainer()
+  GUIInstallerContainer -> GUIInstallerContainer : initialise(MutablePicoContainer container)
+  GUIInstallerContainer -> GUIInstallerContainer : fillContainer(MutablePicoContainer)
+  GUIInstallerContainer -> GUIInstallerContainer : registerComponents(container)
+  GUIInstallerContainer -> GUIInstallerContainer : resolveComponents(container))
+  InstallerGui -> InstallerController : buildInstallation()
+  InstallerGui -> InstallerController : launchInstallation()
+  InstallerController -> InstallerFrame : setVisible(true)
+  InstallerController -> InstallerFrame : navigateNext()
+
+#+end_src
+
+#+RESULTS:
+[[file:uml/installer.png]]
+
+
+
+#+begin_src plantuml :file uml/InstallerFrame.png
+InstallerFrame -- DefaultNavigator
+DefaultNavigator - NavigationHandler
+InstallerFrame -- IzPanels
+class AbstractPanels <T extends AbstractPanelView<V>, V>
+class IzPanels  <IzPanelView, IzPanel>
+AbstractPanels <|--- IzPanels 
+AbstractPanels --"*" AbstractPanelView : panel
+class AbstractPanelView<V>{
++ V getView()
+}
+AbstractPanelView <|-- IzPanelView
+class IzPanelView <IzPanel>
+interface PanelViews <T extends AbstractPanelView<V>, V>
+PanelViews <|.. AbstractPanels
+interface Panels
+Panels <|-- PanelViews
+#+end_src
+
+#+RESULTS:
+[[file:uml/InstallerFrame.png]]
+
+#+begin_src plantuml :file uml/next.png
+hide footbox
+-> NavigationHandler : actionPerformed(ActionEvent)
+NavigationHandler -> NavigationHandler : navigate(ActionEvent)
+NavigationHandler -> DefaultNavigator : next()
+DefaultNavigator -> DefaultNavigator : next(true)
+activate DefaultNavigator #LightSalmon
+   DefaultNavigator -> DefaultNavigator : preSwitchPanel()
+   DefaultNavigator -> AbstractPanels : next(boolean)
+   AbstractPanels -> AbstractPanels : isValid()
+   AbstractPanels -> AbstractPanels : executeValidationActions(panel, true)
+   AbstractPanels -> IzPanelView : isValid()
+   IzPanelView ->   IzPanel : panelValidated()
+   AbstractPanels -> AbstractPanels : switchPanel(int, boolean)
+   AbstractPanels -> IzPanels : switchPanel(newPanelView, oldPanelView)
+   IzPanels -> InstallerFrame : switchPanel(IzPanelView, IzPanelView)
+   InstallerFrame ->  IzPanel :  panelActivate()
+   DefaultNavigator -> DefaultNavigator : postSwitchPanel()   
+   DefaultNavigator -> DefaultNavigator : configureVisibility()
+deactivate DefaultNavigator
+#+end_src
+
+#+RESULTS:
+[[file:uml/next.png]]
+
+
+#+begin_src plantuml :file uml/IzPanelHierarchy.png
+class ShortcutPanel{
+ '// panelActivate()
+}
+class IzPanel{
+panelActivate()
+}
+IzPanel <-- ShortcutPanel
+IzPanel <-- PathInputPanel
+PathInputPanel <-- TargetPanel
+#+end_src
+
+#+RESULTS:
+[[file:uml/IzPanelHierarchy.png]]
+
+#+begin_src plantuml :file uml/ShortcutPanel.panelActivate.png
+hide footbox
+-> ShortcutPanel : panelActivate()
+ShortcutPanel -> ShortcutPanelLogic : refreshShortcutData()
+ShortcutPanelLogic -> ShortcutPanelLogic : readShortcutSpec()
+#+end_src
+
+#+RESULTS:
+[[file:uml/ShortcutPanel.panelActivate.png]]
+
+#+begin_src plantuml :file uml/Unpacker.png
+hide footbox
+-> UnpackerBase : run()
+UnpackerBase -> UnpackerBase : unpack();
+UnpackerBase -> UnpackerBase : preUnpack(List<Pack>)
+activate UnpackerBase #LightSalmon
+UnpackerBase -> InstallerListeners :  beforePacks(List<Pack>, ProgressListener)
+deactivate UnpackerBase
+UnpackerBase -> UnpackerBase : unpack(List<PackInfo>, FileQueue)
+activate UnpackerBase #LightSalmon
+UnpackerBase -> InstallerListeners : beforePack(Pack, int)
+UnpackerBase ->  UnpackerBase  : unpack(PackInfo, int, FileQueue, List<ParsableFile>, List<ExecutableFile>, List<UpdateCheck>)
+UnpackerBase -> UnpackerBase : unpack(PackFile, InputStream, int, Pack, FileQueue)
+UnpackerBase ->   InstallerListeners : afterPack(Pack)
+deactivate UnpackerBase
+UnpackerBase -> UnpackerBase : postUnpack(List<Pack>, FileQueue)
+#+end_src
+
+#+RESULTS:
+[[file:uml/Unpacker.png]]
