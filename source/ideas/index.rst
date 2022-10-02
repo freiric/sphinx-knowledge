@@ -12,7 +12,8 @@ Collection Manager
   
   
 - books, ebooks
-
+   - calibre,
+   - `komga <https://github.com/gotson/komga>`_
   
 
 Scala
@@ -21,7 +22,7 @@ Scala
 - books collections manager
 
  - `palatina <http://palatin.as/about>`_
- - `alexandria <http://alexandria.rubyforge.org/>`_
+ - `alexandria <https://github.com/mvz/alexandria-book-collection-manager>`_ en ruby
 
 - shopping list
 - carton manager

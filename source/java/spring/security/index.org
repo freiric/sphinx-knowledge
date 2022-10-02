@@ -24,6 +24,7 @@ UserDetailsContextMapper <|.. LdapUserDetailsMapper
 #+RESULTS:
 [[file:uml/UserDetails.png]]
 
+* architecture.png
 #+BEGIN_SRC plantuml :file uml/architecture.png
 interface AuthenticationManager {
 Authentication authenticate(Authentication)

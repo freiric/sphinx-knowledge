@@ -1,6 +1,13 @@
 Boot
 ===========
 
+Two main ideas:
+
+  * Automatic Configuration
+  * Starters dependencies
+  * Actuator
+    
+
 
 @SpringBootApplication:
 

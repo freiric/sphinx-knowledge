@@ -7,9 +7,24 @@ Required package:
 - kubeadm
 - kubectl
 - container runtime - Docker
-- minikube
 
-layer-2 layer-3 connectivity vs overlay network
+layer-2 layer-3 connectivity vs overlay network.
+
+Distribution
+*******************
+
+- `Kind <https://kind.sigs.k8s.io/>`_
+- minikube 
+
+Packaging
+***********
+- `Helm <https://helm.sh/>`_
+
+Tools
+*********
+`K9s <https://github.com/derailed/k9s>`_
+
+.. image:: imgs/screen_po.png
 
 
 Architecture

@@ -29,7 +29,7 @@ extensions = [  # 'sphinx.ext.intersphinx',
     'sphinx.ext.todo', 'sphinx.ext.mathjax', 'sphinx.ext.ifconfig',
     'sphinxcontrib.plantuml']
 
-plantuml = 'java -jar /home/fb019397/local/plantuml.jar'
+plantuml = 'java -jar C:\\bin\\plantuml\\plantuml.jar'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

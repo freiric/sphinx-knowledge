@@ -4,11 +4,14 @@ GIT
 Add a remote
 ************
 
-Add a remote with a tracking branch, allow to ``git pull`` adn ``git push`` without having to pecise ``git pull origin master``
+Add a remote with a tracking branch, allow to ``git pull`` and ``git push`` without having to pecise ``git pull origin master``
 
 .. code-block:: bash
 
-   git branch -u https://github.com/user/repo.git
+   git remote add mynewremote https://github.com/user/repo.git
+   git branch -u mynewremote
+   ## if the branch already exists, pass the option -u or --set-upstream to the push command
+   git push -u mynewremote
 
 ..
 		git branch -u https://github.com/freiric/repo.git

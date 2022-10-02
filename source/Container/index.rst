@@ -5,8 +5,9 @@ Container
 
    docker/index
    kubernetes/index
+   Terraform/index
    other/index
-
+   Observability/index
 
 Vagrant
 **********

@@ -8,8 +8,8 @@ One can use `Nvm - Node Version Manager - Simple bash script to manage multiple 
 configured with ``package.json``
 
 
-`Webpack <https://webpack.github.io/docs/>`_  vs `Grunt <https://gruntjs.com/>`_
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+`Webpack <https://webpack.github.io/docs/>`_  
+++++++++++++++++++++++++++++++++++++++++++++++
 
 Starters
 *********
@@ -53,3 +53,6 @@ bower
        "<test-framework-name>": "<version>"
      }
    }
+
+`Grunt <https://gruntjs.com/>`_
+++++++++++++++++++++++++++++++++++

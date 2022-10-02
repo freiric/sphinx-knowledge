@@ -6,6 +6,7 @@ JAVA
    jaas.rst
    test/index.rst
    drools/inde.rst
+   jhipster/index.rst
 
 to look at
    

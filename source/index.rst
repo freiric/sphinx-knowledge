@@ -27,6 +27,7 @@ Welcome to Personal Knowledge's documentation!
   R/index/
   PowerShell/index
   Container/index
+  Clojure/index
   
 Indices and tables
 ==================
