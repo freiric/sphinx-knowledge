@@ -1,10 +1,14 @@
 #+begin_src plantuml :file uml/SpringApplication.run.png
 hide footbox
+participant Main
+-> Main : main ()
+activate Main #LightSalmon
 create SpringApplication
--> SpringApplication : new SpringApplication(Class<?>...)
--> SpringApplication : run(args)
+Main -> SpringApplication : new SpringApplication(Class<?>...)
+Main -> SpringApplication : run(args)
 create ConfigurableApplicationContext
 SpringApplication -> ConfigurableApplicationContext: createApplicationContext()
+deactivate Main
 #+end_src
 
 #+RESULTS:
