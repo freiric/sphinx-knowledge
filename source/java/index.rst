@@ -7,6 +7,7 @@ JAVA
    test/index.rst
    drools/inde.rst
    jhipster/index.rst
+   openTelemetry/openTelemetry.rst
 
 to look at
    

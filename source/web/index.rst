@@ -3,7 +3,8 @@ Web Javascript and Css
 
 .. toctree::
 
-   tooling
+   tooling/index
+   typescript/index
    javascript/index
    angular/index
    react/index

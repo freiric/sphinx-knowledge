@@ -7,6 +7,8 @@ Npm
 One can use `Nvm - Node Version Manager - Simple bash script to manage multiple active node.js versions  <https://github.com/creationix/nvm>`_
 configured with ``package.json``
 
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
 
 `Webpack <https://webpack.github.io/docs/>`_  
 ++++++++++++++++++++++++++++++++++++++++++++++
