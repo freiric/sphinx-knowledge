@@ -1,4 +1,4 @@
-JHipter
+JHipster
 ===========
 
 Concept qui ont un bean spring:
